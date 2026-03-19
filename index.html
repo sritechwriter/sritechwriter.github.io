@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Artilegenz.com | Intelligent Data Intelligence Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #050A14;
+    --ink2: #0D1B2E;
+    --surface: #0A1628;
+    --surface2: #0F1F38;
+    --card: #111D33;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #00D4FF;
+    --accent2: #0095FF;
+    --gold: #F5A623;
+    --green: #00E5A0;
+    --red: #FF4757;
+    --purple: #7C5CBF;
+    --text: #E8EFF8;
+    --text2: #8A9BB5;
+    --text3: #4A5F7A;
+    --glow: rgba(0,212,255,0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ink);
+    color: var(--text);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* CUSTOM SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: var(--accent2); border-radius: 2px; }
+
+  /* GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,149,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,149,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 40px;
+    height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(5,10,20,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 38px; height: 38px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: 16px; color: #fff;
+    box-shadow: 0 0 20px rgba(0,149,255,0.4);
+  }
+  .logo-text {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 20px; color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .logo-text span { color: var(--accent); }
+  .nav-links {
+    display: flex; align-items: center; gap: 8px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none; color: var(--text2);
+    font-size: 14px; font-weight: 400;
+    padding: 8px 14px; border-radius: 8px;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+  .nav-dropdown { position: relative; }
+  .nav-dropdown-menu {
+    display: none;
+    position: absolute; top: calc(100% + 8px); left: 50%;
+    transform: translateX(-50%);
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 14px;
+    padding: 8px;
+    min-width: 220px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    z-index: 100;
+  }
+  .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+  .nav-dropdown-menu a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-radius: 8px;
+    color: var(--text2); font-size: 13px;
+    transition: all 0.2s;
+  }
+  .nav-dropdown-menu a:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+  .nav-dropdown-menu a .dm-icon { font-size: 16px; }
+  .nav-ctas { display: flex; align-items: center; gap: 10px; }
+  .btn-ghost {
+    padding: 9px 18px; border-radius: 8px;
+    border: 1px solid var(--border2);
+    background: transparent; color: var(--text2);
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; text-decoration: none;
+    display: inline-flex; align-items: center;
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-primary {
+    padding: 9px 20px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none; color: #fff;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+    box-shadow: 0 4px 16px rgba(0,149,255,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,149,255,0.4); }
+  .btn-large {
+    padding: 16px 32px; font-size: 16px; border-radius: 12px;
+    font-weight: 500;
+  }
+
+  /* ===== HERO ===== */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 40px 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute; top: -200px; left: 50%;
+    transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(0,149,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute; bottom: -100px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,229,160,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    width: 100%; position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px; border-radius: 100px;
+    border: 1px solid rgba(0,212,255,0.3);
+    background: rgba(0,212,255,0.05);
+    font-size: 12px; font-weight: 500; color: var(--accent);
+    margin-bottom: 24px;
+    animation: fadeSlideUp 0.6s ease both;
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.05; letter-spacing: -2px;
+    color: var(--text);
+    animation: fadeSlideUp 0.6s 0.1s ease both;
+  }
+  .hero-title .gradient-text {
+    background: linear-gradient(135deg, var(--accent), var(--green));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 18px; line-height: 1.7; color: var(--text2); font-weight: 300;
+    animation: fadeSlideUp 0.6s 0.2s ease both;
+  }
+  .hero-actions {
+    margin-top: 36px; display: flex; gap: 14px; align-items: center;
+    animation: fadeSlideUp 0.6s 0.3s ease both;
+  }
+  .hero-stats {
+    margin-top: 56px;
+    display: flex; gap: 40px;
+    animation: fadeSlideUp 0.6s 0.4s ease both;
+  }
+  .hero-stat-val {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 28px; color: var(--text); line-height: 1;
+  }
+  .hero-stat-val span { color: var(--accent); }
+  .hero-stat-label { font-size: 12px; color: var(--text3); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Dashboard Preview */
+  .hero-visual {
+    position: relative;
+    animation: fadeSlideUp 0.6s 0.2s ease both;
+  }
+  .dashboard-frame {
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px var(--border);
+  }
+  .db-topbar {
+    background: var(--surface2);
+    padding: 12px 16px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .db-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .db-dot:nth-child(1) { background: #FF5F57; }
+  .db-dot:nth-child(2) { background: #FEBC2E; }
+  .db-dot:nth-child(3) { background: #28C840; }
+  .db-title-bar { margin-left: 8px; font-size: 12px; color: var(--text3); font-family: 'DM Mono', monospace; }
+  .db-body { padding: 20px; }
+  .db-kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+  .db-kpi {
+    background: var(--surface2); border-radius: 10px; padding: 12px;
+    border: 1px solid var(--border);
+  }
+  .db-kpi-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+  .db-kpi-val { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; }
+  .db-kpi-val.up { color: var(--green); }
+  .db-kpi-val.warn { color: var(--gold); }
+  .db-kpi-val.down { color: var(--red); }
+  .db-kpi-val.blue { color: var(--accent); }
+  .db-kpi-delta { font-size: 10px; color: var(--text3); margin-top: 2px; }
+  .db-chart-row { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .db-chart-card {
+    background: var(--surface2); border-radius: 10px; padding: 14px;
+    border: 1px solid var(--border);
+  }
+  .db-chart-title { font-size: 11px; color: var(--text2); margin-bottom: 10px; font-weight: 500; }
+  .mini-bar-chart { display: flex; align-items: flex-end; gap: 5px; height: 60px; }
+  .mini-bar {
+    flex: 1; border-radius: 3px 3px 0 0;
+    background: linear-gradient(to top, var(--accent2), var(--accent));
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    animation: growBar 1s ease both;
+  }
+  @keyframes growBar {
+    from { transform: scaleY(0); transform-origin: bottom; }
+    to { transform: scaleY(1); transform-origin: bottom; }
+  }
+  .mini-donut { width: 60px; height: 60px; margin: 0 auto; position: relative; }
+  .mini-donut svg { transform: rotate(-90deg); }
+  .mini-donut-center {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700;
+    color: var(--accent);
+  }
+  .db-table-card {
+    background: var(--surface2); border-radius: 10px; padding: 14px;
+    border: 1px solid var(--border);
+  }
+  .db-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .db-table th { color: var(--text3); font-weight: 500; text-align: left; padding: 4px 8px; border-bottom: 1px solid var(--border); }
+  .db-table td { padding: 6px 8px; color: var(--text2); border-bottom: 1px solid rgba(255,255,255,0.03); }
+  .db-table tr:last-child td { border-bottom: none; }
+  .status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 5px; }
+  .status-dot.green { background: var(--green); }
+  .status-dot.yellow { background: var(--gold); }
+  .status-dot.red { background: var(--red); }
+  .db-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; }
+  .db-pill {
+    padding: 4px 10px; border-radius: 100px; font-size: 10px; font-weight: 500;
+    background: rgba(0,229,160,0.1); color: var(--green); border: 1px solid rgba(0,229,160,0.2);
+  }
+  .db-syncing { font-size: 10px; color: var(--text3); display: flex; align-items: center; gap: 4px; }
+  .db-syncing::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 1.5s infinite; }
+  .float-badge {
+    position: absolute; top: -16px; right: -20px;
+    background: var(--card); border: 1px solid var(--border2);
+    border-radius: 12px; padding: 12px 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    font-size: 13px; font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .float-badge2 {
+    position: absolute; bottom: -16px; left: -20px;
+    background: linear-gradient(135deg, rgba(0,229,160,0.1), rgba(0,149,255,0.1));
+    border: 1px solid rgba(0,229,160,0.2);
+    border-radius: 12px; padding: 12px 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    font-size: 13px; font-weight: 500; color: var(--green);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SECTION SHARED ===== */
+  section { position: relative; z-index: 1; }
+  .section-inner { max-width: 1280px; margin: 0 auto; padding: 100px 40px; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 500; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px;
+  }
+  .section-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+  .section-title {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: clamp(32px, 4vw, 52px); line-height: 1.1; letter-spacing: -1.5px;
+    color: var(--text); margin-bottom: 16px;
+  }
+  .section-sub { font-size: 17px; color: var(--text2); line-height: 1.7; max-width: 560px; }
+  .section-divider { height: 1px; background: var(--border); margin: 0 40px; }
+
+  /* ===== LOGOS / TRUST ===== */
+  #trust { padding: 40px 40px; }
+  .trust-inner { max-width: 1280px; margin: 0 auto; }
+  .trust-label { font-size: 12px; color: var(--text3); text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 32px; }
+  .trust-logos { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; }
+  .trust-logo {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px;
+    color: var(--text3); letter-spacing: -0.5px;
+    opacity: 0.5; transition: opacity 0.2s;
+  }
+  .trust-logo:hover { opacity: 0.9; }
+  .trust-logo span { color: var(--accent2); }
+
+  /* ===== FEATURES ===== */
+  #features { background: linear-gradient(180deg, transparent, rgba(0,149,255,0.03), transparent); }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 60px; }
+  .feature-card {
+    background: var(--card); border-radius: 16px; padding: 28px;
+    border: 1px solid var(--border);
+    transition: all 0.3s; position: relative; overflow: hidden;
+  }
+  .feature-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent2), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .feature-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+  .feature-card:hover::before { opacity: 1; }
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 18px;
+  }
+  .fi-blue { background: rgba(0,149,255,0.15); }
+  .fi-green { background: rgba(0,229,160,0.12); }
+  .fi-gold { background: rgba(245,166,35,0.12); }
+  .fi-purple { background: rgba(124,92,191,0.15); }
+  .fi-red { background: rgba(255,71,87,0.12); }
+  .fi-cyan { background: rgba(0,212,255,0.12); }
+  .feature-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 18px; margin-bottom: 10px; }
+  .feature-desc { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+  /* ===== HOW IT WORKS ===== */
+  .steps-container { margin-top: 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .steps-list { display: flex; flex-direction: column; gap: 0; }
+  .step-item { display: flex; gap: 20px; padding: 24px; border-radius: 14px; cursor: pointer; transition: all 0.2s; }
+  .step-item.active { background: var(--card); border: 1px solid var(--border2); }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+    background: var(--surface2); border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 13px; color: var(--text3);
+    transition: all 0.2s;
+  }
+  .step-item.active .step-num { background: var(--accent2); color: #fff; border-color: var(--accent2); }
+  .step-content .step-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 17px; margin-bottom: 6px; }
+  .step-content .step-desc { font-size: 14px; color: var(--text2); line-height: 1.6; }
+  .step-visual-card {
+    background: var(--card); border: 1px solid var(--border2);
+    border-radius: 20px; padding: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .code-block {
+    background: var(--ink); border-radius: 10px; padding: 16px;
+    font-family: 'DM Mono', monospace; font-size: 12px; line-height: 1.8;
+    border: 1px solid var(--border); margin-bottom: 16px;
+    overflow-x: auto;
+  }
+  .code-comment { color: var(--text3); }
+  .code-keyword { color: var(--accent2); }
+  .code-string { color: var(--green); }
+  .code-func { color: var(--gold); }
+  .pipeline-flow { display: flex; align-items: center; gap: 10px; margin-top: 16px; }
+  .pipeline-node {
+    flex: 1; text-align: center; padding: 10px 8px; border-radius: 8px;
+    background: var(--surface2); border: 1px solid var(--border);
+    font-size: 11px; font-weight: 500; color: var(--text2);
+  }
+  .pipeline-node.active-node { background: rgba(0,149,255,0.1); border-color: rgba(0,149,255,0.3); color: var(--accent); }
+  .pipeline-arrow { color: var(--text3); font-size: 14px; }
+
+  /* ===== ROLES / PERSONAS ===== */
+  #roles { background: linear-gradient(180deg, transparent, rgba(0,229,160,0.02), transparent); }
+  .roles-tabs { display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+  .role-tab {
+    padding: 10px 20px; border-radius: 100px;
+    border: 1px solid var(--border2);
+    background: transparent; color: var(--text2);
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .role-tab.active { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+  .role-tab:hover:not(.active) { border-color: var(--accent2); color: var(--accent2); }
+  .roles-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .role-panel { display: none; }
+  .role-panel.active { display: contents; }
+  .role-info { display: flex; flex-direction: column; gap: 20px; }
+  .role-title { font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 700; }
+  .role-desc { font-size: 16px; color: var(--text2); line-height: 1.7; }
+  .role-perks { display: flex; flex-direction: column; gap: 12px; }
+  .role-perk { display: flex; align-items: flex-start; gap: 12px; }
+  .perk-check { color: var(--green); font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+  .perk-text { font-size: 14px; color: var(--text2); line-height: 1.6; }
+  .role-dashboard {
+    background: var(--card); border: 1px solid var(--border2);
+    border-radius: 16px; padding: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+  .rd-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+  .rd-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 15px; }
+  .rd-badge { padding: 4px 12px; border-radius: 100px; font-size: 11px; background: rgba(0,229,160,0.1); color: var(--green); border: 1px solid rgba(0,229,160,0.2); }
+  .rd-kpis { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+  .rd-kpi { background: var(--surface2); border-radius: 10px; padding: 14px; border: 1px solid var(--border); }
+  .rd-kpi-label { font-size: 11px; color: var(--text3); margin-bottom: 6px; }
+  .rd-kpi-val { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 700; }
+  .rd-kpi-change { font-size: 11px; margin-top: 4px; }
+  .rd-kpi-change.pos { color: var(--green); }
+  .rd-kpi-change.neg { color: var(--red); }
+  .rd-chart-placeholder {
+    background: var(--surface2); border-radius: 10px; padding: 14px;
+    border: 1px solid var(--border); height: 120px;
+    display: flex; align-items: flex-end; gap: 4px; overflow: hidden;
+  }
+  .mini-line-bar {
+    flex: 1; border-radius: 2px 2px 0 0;
+    background: linear-gradient(to top, rgba(0,149,255,0.6), rgba(0,212,255,0.3));
+  }
+
+  /* ===== PRODUCTS ===== */
+  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .product-card {
+    background: var(--card); border-radius: 20px; overflow: hidden;
+    border: 1px solid var(--border); transition: all 0.3s;
+    display: flex; flex-direction: column;
+  }
+  .product-card:hover { transform: translateY(-6px); border-color: var(--border2); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+  .product-header { padding: 28px 28px 0; }
+  .product-tag {
+    display: inline-block; padding: 4px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 500; margin-bottom: 16px;
+  }
+  .pt-core { background: rgba(0,149,255,0.1); color: var(--accent2); }
+  .pt-ai { background: rgba(124,92,191,0.15); color: #A47EFF; }
+  .pt-enterprise { background: rgba(245,166,35,0.1); color: var(--gold); }
+  .product-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 22px; margin-bottom: 10px; }
+  .product-desc { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 20px; }
+  .product-visual {
+    margin: 0 28px; border-radius: 12px; height: 140px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .pv-blue { background: linear-gradient(135deg, rgba(0,149,255,0.15), rgba(0,212,255,0.08)); border: 1px solid rgba(0,149,255,0.2); }
+  .pv-purple { background: linear-gradient(135deg, rgba(124,92,191,0.15), rgba(164,126,255,0.08)); border: 1px solid rgba(124,92,191,0.2); }
+  .pv-gold { background: linear-gradient(135deg, rgba(245,166,35,0.15), rgba(255,200,100,0.08)); border: 1px solid rgba(245,166,35,0.2); }
+  .product-footer { padding: 20px 28px 28px; margin-top: auto; }
+  .product-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  .product-feature { font-size: 13px; color: var(--text2); display: flex; align-items: center; gap: 8px; }
+  .product-feature::before { content: '→'; color: var(--accent); font-size: 12px; }
+  .product-price { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 28px; margin-bottom: 4px; }
+  .product-price-sub { font-size: 12px; color: var(--text3); margin-bottom: 16px; }
+
+  /* ===== INDUSTRIES ===== */
+  #industries { background: linear-gradient(180deg, transparent, rgba(124,92,191,0.03), transparent); }
+  .industries-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 60px; }
+  .industry-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px; text-align: center;
+    cursor: pointer; transition: all 0.3s;
+  }
+  .industry-card:hover { border-color: var(--accent2); transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0,149,255,0.1); }
+  .industry-emoji { font-size: 32px; display: block; margin-bottom: 12px; }
+  .industry-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 16px; margin-bottom: 6px; }
+  .industry-count { font-size: 12px; color: var(--text3); }
+
+  /* ===== INTEGRATIONS ===== */
+  #integrations {}
+  .integrations-split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: center; margin-top: 60px; }
+  .integrations-visual {
+    background: var(--card); border: 1px solid var(--border2);
+    border-radius: 20px; padding: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    position: relative;
+  }
+  .integrations-grid-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .int-chip {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 8px; text-align: center;
+    font-size: 12px; font-weight: 500; color: var(--text2);
+    transition: all 0.2s; cursor: default;
+  }
+  .int-chip:hover { border-color: var(--accent2); color: var(--accent); background: rgba(0,149,255,0.05); }
+  .int-chip .int-logo { font-size: 20px; display: block; margin-bottom: 4px; }
+  .integrations-center {
+    margin: 16px 0; padding: 14px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(0,149,255,0.1), rgba(0,212,255,0.05));
+    border: 1px solid rgba(0,212,255,0.2);
+    text-align: center;
+  }
+  .int-center-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; color: var(--accent); }
+  .int-center-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .integration-list { display: flex; flex-direction: column; gap: 16px; }
+  .integration-item { display: flex; gap: 14px; align-items: flex-start; }
+  .ii-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; background: var(--surface2); border: 1px solid var(--border); flex-shrink: 0; }
+  .ii-title { font-weight: 500; font-size: 15px; margin-bottom: 4px; }
+  .ii-desc { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+  /* ===== TESTIMONIALS ===== */
+  #testimonials {}
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .testimonial-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 28px; transition: all 0.3s;
+  }
+  .testimonial-card:hover { border-color: var(--border2); transform: translateY(-4px); }
+  .tc-stars { color: var(--gold); font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+  .tc-quote { font-size: 15px; color: var(--text2); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+  .tc-author { display: flex; align-items: center; gap: 12px; }
+  .tc-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px;
+    border: 1px solid var(--border2);
+  }
+  .av-blue { background: rgba(0,149,255,0.2); color: var(--accent); }
+  .av-green { background: rgba(0,229,160,0.15); color: var(--green); }
+  .av-gold { background: rgba(245,166,35,0.2); color: var(--gold); }
+  .av-purple { background: rgba(124,92,191,0.2); color: #A47EFF; }
+  .tc-name { font-weight: 500; font-size: 14px; }
+  .tc-role { font-size: 12px; color: var(--text3); }
+
+  /* ===== PRICING ===== */
+  #pricing {}
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+  .pricing-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 32px; position: relative;
+    transition: all 0.3s; display: flex; flex-direction: column;
+  }
+  .pricing-card.featured {
+    border-color: var(--accent2);
+    background: linear-gradient(180deg, rgba(0,149,255,0.08), var(--card));
+    box-shadow: 0 0 40px rgba(0,149,255,0.1);
+  }
+  .pricing-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    color: #fff; padding: 5px 16px; border-radius: 100px;
+    font-size: 12px; font-weight: 600; white-space: nowrap;
+  }
+  .pricing-tier { font-size: 13px; color: var(--text3); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+  .pricing-price { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 42px; line-height: 1; margin-bottom: 6px; }
+  .pricing-price sup { font-size: 20px; vertical-align: top; margin-top: 8px; }
+  .pricing-price-sub { font-size: 13px; color: var(--text3); margin-bottom: 24px; }
+  .pricing-divider { height: 1px; background: var(--border); margin: 20px 0; }
+  .pricing-features { flex: 1; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .pf-item { font-size: 14px; color: var(--text2); display: flex; align-items: flex-start; gap: 10px; }
+  .pf-item .check { color: var(--green); flex-shrink: 0; }
+  .pf-item .cross { color: var(--text3); flex-shrink: 0; }
+
+  /* ===== CTA BANNER ===== */
+  #cta {
+    margin: 0 40px; border-radius: 24px;
+    background: linear-gradient(135deg, rgba(0,149,255,0.12), rgba(0,229,160,0.06));
+    border: 1px solid rgba(0,149,255,0.2);
+    padding: 80px 60px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  #cta::before {
+    content: ''; position: absolute;
+    top: -100px; left: 50%; transform: translateX(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,149,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(32px, 4vw, 52px); line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 16px; }
+  .cta-sub { font-size: 17px; color: var(--text2); max-width: 540px; margin: 0 auto 32px; }
+  .cta-actions { display: flex; gap: 14px; justify-content: center; align-items: center; }
+  .cta-note { margin-top: 16px; font-size: 12px; color: var(--text3); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    margin-top: 100px;
+    border-top: 1px solid var(--border);
+    padding: 60px 40px 40px;
+  }
+  .footer-inner { max-width: 1280px; margin: 0 auto; }
+  .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+  .footer-brand-desc { font-size: 14px; color: var(--text3); line-height: 1.7; margin-top: 12px; max-width: 240px; }
+  .footer-col-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 14px; margin-bottom: 16px; color: var(--text); }
+  .footer-links { display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { font-size: 13px; color: var(--text3); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid var(--border); }
+  .footer-copy { font-size: 12px; color: var(--text3); }
+  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal a { font-size: 12px; color: var(--text3); text-decoration: none; }
+  .footer-legal a:hover { color: var(--accent); }
+
+  /* ===== MOBILE MENU ===== */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--text2); border-radius: 2px; transition: all 0.3s; }
+
+  /* ===== SCROLL ANIMATIONS ===== */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .industries-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .roles-content { grid-template-columns: 1fr; }
+    .steps-container { grid-template-columns: 1fr; }
+    .integrations-split { grid-template-columns: 1fr; }
+    .db-kpi-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links, .nav-ctas { display: none; }
+    .hamburger { display: flex; }
+    #hero { padding: 90px 20px 60px; }
+    .section-inner { padding: 60px 20px; }
+    .section-divider { margin: 0 20px; }
+    #trust { padding: 30px 20px; }
+    #cta { margin: 0 20px; padding: 40px 24px; }
+    footer { padding: 40px 20px 24px; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: 1fr; }
+    .industries-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-stats { gap: 24px; flex-wrap: wrap; }
+    .trust-logos { gap: 24px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .cta-actions { flex-direction: column; }
+    .db-chart-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">AG</div>
+    <div class="logo-text">Arti<span>legenz</span></div>
+  </a>
+  <ul class="nav-links">
+    <li class="nav-dropdown">
+      <a href="#">Products ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="#products"><span class="dm-icon">🔷</span> Artilegenz Core</a>
+        <a href="#products"><span class="dm-icon">🤖</span> AI Intelligence Layer</a>
+        <a href="#products"><span class="dm-icon">🏢</span> Enterprise Suite</a>
+        <a href="#products"><span class="dm-icon">📊</span> Executive Command</a>
+      </div>
+    </li>
+    <li class="nav-dropdown">
+      <a href="#">Solutions ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="#roles"><span class="dm-icon">👔</span> For CXOs & Executives</a>
+        <a href="#roles"><span class="dm-icon">📈</span> For Sales & Revenue</a>
+        <a href="#roles"><span class="dm-icon">🏭</span> For Operations</a>
+        <a href="#roles"><span class="dm-icon">💰</span> For Finance Teams</a>
+      </div>
+    </li>
+    <li class="nav-dropdown">
+      <a href="#">Industries ▾</a>
+      <div class="nav-dropdown-menu">
+        <a href="#industries"><span class="dm-icon">🏭</span> Manufacturing</a>
+        <a href="#industries"><span class="dm-icon">🛒</span> Retail & CPG</a>
+        <a href="#industries"><span class="dm-icon">🏦</span> Banking & Finance</a>
+        <a href="#industries"><span class="dm-icon">⚕️</span> Healthcare</a>
+      </div>
+    </li>
+    <li><a href="#integrations">Integrations</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <div class="nav-ctas">
+    <a href="#" class="btn-ghost">Sign in</a>
+    <a href="#cta" class="btn-primary">Get a Demo →</a>
+  </div>
+  <div class="hamburger" onclick="toggleMobileMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge"><div class="hero-badge-dot"></div> SAP HANA · AI · ML · Real-Time Intelligence</div>
+      <h1 class="hero-title">
+        Your SAP HANA data,<br>
+        <span class="gradient-text">finally set free.</span>
+      </h1>
+      <p class="hero-sub">Artilegenz bridges SAP HANA to every reporting platform your business runs on — with AI-powered insights, role-based access controls, and one-click exports. Zero hassle. Real-time decisions.</p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn-primary btn-large">Start Free Trial →</a>
+        <a href="#features" class="btn-ghost btn-large">See How It Works</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-val">12<span>x</span></div>
+          <div class="hero-stat-label">Faster Reporting</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">99<span>.9%</span></div>
+          <div class="hero-stat-label">Data Accuracy</div>
+        </div>
+        <div>
+          <div class="hero-stat-val">500<span>+</span></div>
+          <div class="hero-stat-label">Enterprise Clients</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="float-badge">🤖 AI Summary Active <span style="color:var(--green);font-size:11px">LIVE</span></div>
+      <div class="dashboard-frame">
+        <div class="db-topbar">
+          <div class="db-dot"></div><div class="db-dot"></div><div class="db-dot"></div>
+          <span class="db-title-bar">Artilegenz Executive Dashboard · CFO View</span>
+        </div>
+        <div class="db-body">
+          <div class="db-kpi-row">
+            <div class="db-kpi"><div class="db-kpi-label">Revenue</div><div class="db-kpi-val blue">$48.2M</div><div class="db-kpi-delta">↑ 14.3% YoY</div></div>
+            <div class="db-kpi"><div class="db-kpi-label">Gross Profit</div><div class="db-kpi-val up">$19.1M</div><div class="db-kpi-delta">↑ 8.7%</div></div>
+            <div class="db-kpi"><div class="db-kpi-label">Raw Mat.</div><div class="db-kpi-val warn">$11.4M</div><div class="db-kpi-delta">⚠ +4.2%</div></div>
+            <div class="db-kpi"><div class="db-kpi-label">Net Margin</div><div class="db-kpi-val up">39.6%</div><div class="db-kpi-delta">↑ 2.1pp</div></div>
+          </div>
+          <div class="db-chart-row">
+            <div class="db-chart-card">
+              <div class="db-chart-title">Monthly Revenue Trend</div>
+              <div class="mini-bar-chart">
+                <div class="mini-bar" style="height:55%;animation-delay:0.0s"></div>
+                <div class="mini-bar" style="height:62%;animation-delay:0.05s"></div>
+                <div class="mini-bar" style="height:48%;animation-delay:0.1s"></div>
+                <div class="mini-bar" style="height:70%;animation-delay:0.15s"></div>
+                <div class="mini-bar" style="height:65%;animation-delay:0.2s"></div>
+                <div class="mini-bar" style="height:80%;animation-delay:0.25s"></div>
+                <div class="mini-bar" style="height:72%;animation-delay:0.3s"></div>
+                <div class="mini-bar" style="height:88%;animation-delay:0.35s"></div>
+                <div class="mini-bar" style="height:82%;animation-delay:0.4s"></div>
+                <div class="mini-bar" style="height:95%;animation-delay:0.45s;opacity:1;background:linear-gradient(to top,var(--green),rgba(0,229,160,0.4))"></div>
+              </div>
+            </div>
+            <div class="db-chart-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+              <div class="db-chart-title" style="text-align:center">Segment Mix</div>
+              <div class="mini-donut">
+                <svg width="60" height="60" viewBox="0 0 60 60">
+                  <circle cx="30" cy="30" r="22" fill="none" stroke="#1A2740" stroke-width="10"/>
+                  <circle cx="30" cy="30" r="22" fill="none" stroke="var(--accent2)" stroke-width="10" stroke-dasharray="69 69" stroke-dashoffset="0"/>
+                  <circle cx="30" cy="30" r="22" fill="none" stroke="var(--green)" stroke-width="10" stroke-dasharray="30 138" stroke-dashoffset="-69"/>
+                  <circle cx="30" cy="30" r="22" fill="none" stroke="var(--gold)" stroke-width="10" stroke-dasharray="20 138" stroke-dashoffset="-99"/>
+                </svg>
+                <div class="mini-donut-center">69%</div>
+              </div>
+            </div>
+          </div>
+          <div class="db-table-card">
+            <table class="db-table">
+              <tr><th>Region</th><th>Sales</th><th>vs Plan</th><th>Status</th></tr>
+              <tr><td>EMEA</td><td>$18.4M</td><td>+12%</td><td><span class="status-dot green"></span>On Track</td></tr>
+              <tr><td>APAC</td><td>$14.7M</td><td>+3%</td><td><span class="status-dot yellow"></span>Watch</td></tr>
+              <tr><td>Americas</td><td>$15.1M</td><td>+18%</td><td><span class="status-dot green"></span>Exceeding</td></tr>
+            </table>
+          </div>
+          <div class="db-footer">
+            <div class="db-pill">✓ SAP HANA Synced</div>
+            <div class="db-syncing">Live · Updated 12s ago</div>
+          </div>
+        </div>
+      </div>
+      <div class="float-badge2">📈 +14.3% Revenue vs PY</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <div class="trust-inner">
+    <div class="trust-label">Trusted by industry leaders worldwide</div>
+    <div class="trust-logos">
+      <div class="trust-logo">GLOBAL<span>TECH</span></div>
+      <div class="trust-logo">APEX<span>CORP</span></div>
+      <div class="trust-logo">INNO<span>VAX</span></div>
+      <div class="trust-logo">PRIMUS<span>GRP</span></div>
+      <div class="trust-logo">STELLAR<span>IND</span></div>
+      <div class="trust-logo">NEXUS<span>FIN</span></div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-inner">
+    <div class="section-tag reveal">Platform Capabilities</div>
+    <h2 class="section-title reveal">Everything your C-Suite<br>needs in one place</h2>
+    <p class="section-sub reveal">From real-time HANA exports to AI-driven anomaly detection — Artilegenz is built for speed, accuracy, and executive clarity.</p>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon fi-blue">⚡</div>
+        <div class="feature-title">Real-Time HANA Export</div>
+        <div class="feature-desc">Zero-latency extraction of any SAP HANA table, view, or calculation into Power BI, Tableau, SAP Analytics Cloud, Excel, and 40+ platforms.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon fi-purple">🤖</div>
+        <div class="feature-title">AI & ML Intelligence</div>
+        <div class="feature-desc">Embedded machine learning models surface anomalies, forecast trends, and generate plain-language summaries — no data science team required.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon fi-green">🔐</div>
+        <div class="feature-title">Role-Based Access Control</div>
+        <div class="feature-desc">Granular, persona-based data visibility. CEOs see org-wide KPIs. Regional VPs see their territory. Finance sees cost centres. Every role, curated.</div>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon fi-gold">📊</div>
+        <div class="feature-title">Executive Dashboards</div>
+        <div class="feature-desc">Pre-built C-Suite dashboards covering revenue, profit, inventory, cash flow, and supply chain — customisable to your business hierarchy.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon fi-cyan">🔗</div>
+        <div class="feature-title">Universal Integrations</div>
+        <div class="feature-desc">Connect SAP HANA to Snowflake, Azure Synapse, AWS Redshift, Google BigQuery, and every major BI tool — all from a single unified layer.</div>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon fi-red">🔔</div>
+        <div class="feature-title">Smart Alerts & Triggers</div>
+        <div class="feature-desc">AI-monitored KPI thresholds send instant alerts via email, Teams, or Slack when metrics deviate — before problems escalate to the boardroom.</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-inner">
+    <div class="section-tag reveal">How It Works</div>
+    <h2 class="section-title reveal">From HANA to insight<br>in under 60 seconds</h2>
+    <div class="steps-container">
+      <div class="steps-list">
+        <div class="step-item active" onclick="setStep(this, 0)">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <div class="step-title">Connect Your SAP HANA Instance</div>
+            <div class="step-desc">Paste your HANA connection string. Artilegenz auto-discovers all schemas, tables, CDS views, and calculation views instantly.</div>
+          </div>
+        </div>
+        <div class="step-item" onclick="setStep(this, 1)">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <div class="step-title">Configure Access Roles & Policies</div>
+            <div class="step-desc">Map organisational roles — CEO, CFO, VP Sales, Plant Manager — to data visibility rules using a drag-and-drop policy editor.</div>
+          </div>
+        </div>
+        <div class="step-item" onclick="setStep(this, 2)">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <div class="step-title">Select Target Platforms</div>
+            <div class="step-desc">Choose where data flows: Power BI, Tableau, Excel, SAP Analytics Cloud, Snowflake, or your custom API endpoint.</div>
+          </div>
+        </div>
+        <div class="step-item" onclick="setStep(this, 3)">
+          <div class="step-num">04</div>
+          <div class="step-content">
+            <div class="step-title">AI Activates, Dashboards Go Live</div>
+            <div class="step-desc">The AI layer enriches data, detects anomalies, and populates executive dashboards. Your leadership team sees live insights instantly.</div>
+          </div>
+        </div>
+      </div>
+      <div class="step-visual-card reveal">
+        <div class="code-block">
+<span class="code-comment">// Artilegenz Configuration · 30 seconds to live</span>
+<span class="code-keyword">const</span> pipeline = <span class="code-keyword">await</span> <span class="code-func">HanaX.connect</span>({
+  <span class="code-string">host</span>: <span class="code-string">"your-hana.internal"</span>,
+  <span class="code-string">schema</span>: <span class="code-string">"SALES_MART"</span>,
+  <span class="code-string">tables</span>: [<span class="code-string">"VBAK"</span>, <span class="code-string">"BSEG"</span>, <span class="code-string">"T001"</span>],
+  <span class="code-string">aiLayer</span>: <span class="code-keyword">true</span>
+});
+
+<span class="code-keyword">await</span> pipeline.<span class="code-func">exportTo</span>([
+  <span class="code-string">"powerbi"</span>, <span class="code-string">"tableau"</span>, <span class="code-string">"snowflake"</span>
+]);
+
+<span class="code-comment">// ✓ Pipeline live · 4 tables · AI active</span>
+        </div>
+        <div class="pipeline-flow">
+          <div class="pipeline-node active-node">SAP HANA</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-node active-node">Artilegenz.com</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-node">AI Layer</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-node">Power BI</div>
+          <div class="pipeline-arrow">→</div>
+          <div class="pipeline-node">Dashboard</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- ROLES / PERSONAS -->
+<section id="roles">
+  <div class="section-inner">
+    <div class="section-tag reveal">Role-Based Intelligence</div>
+    <h2 class="section-title reveal">Built for every leader<br>in your organisation</h2>
+    <p class="section-sub reveal">Each role gets a bespoke view — the data they need, nothing they don't, with the depth appropriate to their decisions.</p>
+    <div class="roles-tabs reveal">
+      <button class="role-tab active" onclick="switchRole(this, 'ceo')">CEO / C-Suite</button>
+      <button class="role-tab" onclick="switchRole(this, 'cfo')">CFO / Finance</button>
+      <button class="role-tab" onclick="switchRole(this, 'cso')">CSO / Sales</button>
+      <button class="role-tab" onclick="switchRole(this, 'coo')">COO / Operations</button>
+      <button class="role-tab" onclick="switchRole(this, 'vp')">VP / Mid-Level</button>
+    </div>
+    <div class="roles-content">
+      <!-- CEO -->
+      <div class="role-panel active" id="role-ceo">
+        <div class="role-info">
+          <div class="role-title">CEO / Board View</div>
+          <div class="role-desc">The full organizational picture — revenue, profit, market performance, strategic KPIs — in one commanding view. Make board-level decisions in real time, not next quarter.</div>
+          <div class="role-perks">
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Global P&L and revenue aggregated across all business units</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">AI-generated executive summary with forward-looking insights</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Competitive benchmarking and market share indicators</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">One-tap drill-down from company to BU to product line</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Board report export in PDF/PPT with one click</div></div>
+          </div>
+        </div>
+        <div class="role-dashboard">
+          <div class="rd-header">
+            <div class="rd-title">CEO Command Centre</div>
+            <div class="rd-badge">● Live</div>
+          </div>
+          <div class="rd-kpis">
+            <div class="rd-kpi"><div class="rd-kpi-label">Group Revenue</div><div class="rd-kpi-val" style="color:var(--accent)">$284M</div><div class="rd-kpi-change pos">↑ 11.2% YoY</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">EBITDA</div><div class="rd-kpi-val" style="color:var(--green)">$71M</div><div class="rd-kpi-change pos">↑ 8.4%</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">Market Cap</div><div class="rd-kpi-val" style="color:var(--gold)">$1.2B</div><div class="rd-kpi-change pos">↑ 3.1%</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">Employee NPS</div><div class="rd-kpi-val" style="color:var(--accent)">72</div><div class="rd-kpi-change pos">↑ +4pts</div></div>
+          </div>
+          <div class="rd-chart-placeholder">
+            <div class="mini-line-bar" style="height:50%"></div><div class="mini-line-bar" style="height:60%"></div>
+            <div class="mini-line-bar" style="height:45%"></div><div class="mini-line-bar" style="height:75%"></div>
+            <div class="mini-line-bar" style="height:70%"></div><div class="mini-line-bar" style="height:85%"></div>
+            <div class="mini-line-bar" style="height:78%"></div><div class="mini-line-bar" style="height:92%;background:linear-gradient(to top,rgba(0,229,160,0.7),rgba(0,229,160,0.3))"></div>
+          </div>
+        </div>
+      </div>
+      <!-- CFO -->
+      <div class="role-panel" id="role-cfo">
+        <div class="role-info">
+          <div class="role-title">CFO / Finance View</div>
+          <div class="role-desc">Complete financial intelligence — cost centers, cash flow, budget vs actuals, AP/AR aging, and working capital — directly from SAP HANA's FI/CO modules.</div>
+          <div class="role-perks">
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Live P&L, Balance Sheet, and Cash Flow statements</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Budget vs actuals variance with AI-powered explanations</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Multi-currency consolidation from HANA BSEG tables</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">AP/AR aging buckets with predictive cash flow forecasting</div></div>
+          </div>
+        </div>
+        <div class="role-dashboard">
+          <div class="rd-header"><div class="rd-title">CFO Finance Centre</div><div class="rd-badge">● Live</div></div>
+          <div class="rd-kpis">
+            <div class="rd-kpi"><div class="rd-kpi-label">Cash Position</div><div class="rd-kpi-val" style="color:var(--green)">$42.1M</div><div class="rd-kpi-change pos">↑ Healthy</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">Budget Var.</div><div class="rd-kpi-val" style="color:var(--gold)">-2.1%</div><div class="rd-kpi-change neg">⚠ Monitor</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">AR Overdue</div><div class="rd-kpi-val" style="color:var(--red)">$3.4M</div><div class="rd-kpi-change neg">↑ +8%</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">OPEX</div><div class="rd-kpi-val" style="color:var(--accent)">$19.2M</div><div class="rd-kpi-change pos">↓ -1.8%</div></div>
+          </div>
+          <div class="rd-chart-placeholder">
+            <div class="mini-line-bar" style="height:70%;background:linear-gradient(to top,rgba(245,166,35,0.6),rgba(245,166,35,0.2))"></div>
+            <div class="mini-line-bar" style="height:80%;background:linear-gradient(to top,rgba(245,166,35,0.6),rgba(245,166,35,0.2))"></div>
+            <div class="mini-line-bar" style="height:60%;background:linear-gradient(to top,rgba(245,166,35,0.6),rgba(245,166,35,0.2))"></div>
+            <div class="mini-line-bar" style="height:75%;background:linear-gradient(to top,rgba(245,166,35,0.6),rgba(245,166,35,0.2))"></div>
+            <div class="mini-line-bar" style="height:85%;background:linear-gradient(to top,rgba(245,166,35,0.6),rgba(245,166,35,0.2))"></div>
+            <div class="mini-line-bar" style="height:90%;background:linear-gradient(to top,rgba(0,229,160,0.7),rgba(0,229,160,0.3))"></div>
+          </div>
+        </div>
+      </div>
+      <!-- CSO -->
+      <div class="role-panel" id="role-cso">
+        <div class="role-info">
+          <div class="role-title">CSO / Sales View</div>
+          <div class="role-desc">Sales orders, pipeline velocity, win/loss rates, and revenue forecasts — pulled live from SAP SD module and enriched with AI sales predictions.</div>
+          <div class="role-perks">
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Real-time order pipeline from SAP VBAK/VBAP tables</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">AI-powered revenue forecast with confidence intervals</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Rep performance and quota attainment by territory</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Customer segment profitability and churn risk scores</div></div>
+          </div>
+        </div>
+        <div class="role-dashboard">
+          <div class="rd-header"><div class="rd-title">CSO Sales Intelligence</div><div class="rd-badge">● Live</div></div>
+          <div class="rd-kpis">
+            <div class="rd-kpi"><div class="rd-kpi-label">Pipeline</div><div class="rd-kpi-val" style="color:var(--accent)">$94M</div><div class="rd-kpi-change pos">↑ 22%</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">Won QTD</div><div class="rd-kpi-val" style="color:var(--green)">$31.2M</div><div class="rd-kpi-change pos">96% quota</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">Win Rate</div><div class="rd-kpi-val" style="color:var(--gold)">41%</div><div class="rd-kpi-change pos">↑ +5pp</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">Avg Deal</div><div class="rd-kpi-val" style="color:var(--accent)">$180K</div><div class="rd-kpi-change pos">↑ 12%</div></div>
+          </div>
+          <div class="rd-chart-placeholder">
+            <div class="mini-line-bar" style="height:40%"></div><div class="mini-line-bar" style="height:55%"></div>
+            <div class="mini-line-bar" style="height:65%"></div><div class="mini-line-bar" style="height:60%"></div>
+            <div class="mini-line-bar" style="height:72%"></div><div class="mini-line-bar" style="height:80%"></div>
+            <div class="mini-line-bar" style="height:88%;background:linear-gradient(to top,rgba(0,229,160,0.7),rgba(0,229,160,0.3))"></div>
+          </div>
+        </div>
+      </div>
+      <!-- COO -->
+      <div class="role-panel" id="role-coo">
+        <div class="role-info">
+          <div class="role-title">COO / Operations View</div>
+          <div class="role-desc">Plant performance, production orders, inventory levels, raw material consumption, and supply chain KPIs — from SAP PP/MM/WM directly.</div>
+          <div class="role-perks">
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">OEE, throughput, and downtime from SAP PP tables</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Inventory and raw material levels with reorder alerts</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Supplier scorecard and procurement efficiency metrics</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Predictive maintenance scheduling from IoT + HANA data</div></div>
+          </div>
+        </div>
+        <div class="role-dashboard">
+          <div class="rd-header"><div class="rd-title">COO Operations Hub</div><div class="rd-badge">● Live</div></div>
+          <div class="rd-kpis">
+            <div class="rd-kpi"><div class="rd-kpi-label">OEE</div><div class="rd-kpi-val" style="color:var(--green)">84.2%</div><div class="rd-kpi-change pos">↑ +2.1pp</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">Inventory</div><div class="rd-kpi-val" style="color:var(--accent)">12.4K</div><div class="rd-kpi-change pos">Optimal</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">Defect Rate</div><div class="rd-kpi-val" style="color:var(--gold)">0.8%</div><div class="rd-kpi-change neg">⚠ +0.2pp</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">On-Time Del.</div><div class="rd-kpi-val" style="color:var(--green)">97.3%</div><div class="rd-kpi-change pos">↑ 1pp</div></div>
+          </div>
+          <div class="rd-chart-placeholder">
+            <div class="mini-line-bar" style="height:80%;background:linear-gradient(to top,rgba(0,229,160,0.6),rgba(0,229,160,0.2))"></div>
+            <div class="mini-line-bar" style="height:75%;background:linear-gradient(to top,rgba(0,229,160,0.6),rgba(0,229,160,0.2))"></div>
+            <div class="mini-line-bar" style="height:82%;background:linear-gradient(to top,rgba(0,229,160,0.6),rgba(0,229,160,0.2))"></div>
+            <div class="mini-line-bar" style="height:70%;background:linear-gradient(to top,rgba(245,166,35,0.6),rgba(245,166,35,0.2))"></div>
+            <div class="mini-line-bar" style="height:85%;background:linear-gradient(to top,rgba(0,229,160,0.6),rgba(0,229,160,0.2))"></div>
+            <div class="mini-line-bar" style="height:90%;background:linear-gradient(to top,rgba(0,229,160,0.7),rgba(0,229,160,0.3))"></div>
+          </div>
+        </div>
+      </div>
+      <!-- VP -->
+      <div class="role-panel" id="role-vp">
+        <div class="role-info">
+          <div class="role-title">VP / Mid-Level Manager</div>
+          <div class="role-desc">Focused views scoped to your specific business unit, region, or function. No information overload — just the exact data that drives your team's performance.</div>
+          <div class="role-perks">
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Region- or BU-scoped data with hierarchical drill-down</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Team performance metrics and goal tracking</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Custom alert thresholds for your department KPIs</div></div>
+            <div class="role-perk"><div class="perk-check">✓</div><div class="perk-text">Self-service ad-hoc reports without IT involvement</div></div>
+          </div>
+        </div>
+        <div class="role-dashboard">
+          <div class="rd-header"><div class="rd-title">VP Regional Dashboard</div><div class="rd-badge">● Live</div></div>
+          <div class="rd-kpis">
+            <div class="rd-kpi"><div class="rd-kpi-label">Region Rev.</div><div class="rd-kpi-val" style="color:var(--accent)">$18.4M</div><div class="rd-kpi-change pos">↑ 12% QoQ</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">Team Quota</div><div class="rd-kpi-val" style="color:var(--green)">108%</div><div class="rd-kpi-change pos">Exceeding</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">Headcount</div><div class="rd-kpi-val" style="color:var(--gold)">42</div><div class="rd-kpi-change pos">2 open roles</div></div>
+            <div class="rd-kpi"><div class="rd-kpi-label">Cust. Sat.</div><div class="rd-kpi-val" style="color:var(--green)">4.7★</div><div class="rd-kpi-change pos">↑ +0.2</div></div>
+          </div>
+          <div class="rd-chart-placeholder">
+            <div class="mini-line-bar" style="height:45%"></div><div class="mini-line-bar" style="height:60%"></div>
+            <div class="mini-line-bar" style="height:72%"></div><div class="mini-line-bar" style="height:68%"></div>
+            <div class="mini-line-bar" style="height:80%"></div><div class="mini-line-bar" style="height:75%"></div>
+            <div class="mini-line-bar" style="height:92%;background:linear-gradient(to top,rgba(0,212,255,0.7),rgba(0,212,255,0.3))"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-inner">
+    <div class="section-tag reveal">Product Suite</div>
+    <h2 class="section-title reveal">Three powerful products.<br>One unified platform.</h2>
+    <div class="products-grid">
+      <div class="product-card reveal">
+        <div class="product-header">
+          <div class="product-tag pt-core">Core</div>
+          <div class="product-name">Artilegenz Core</div>
+          <div class="product-desc">The foundation layer — extract, transform, and deliver SAP HANA data to any reporting platform with zero code and maximum speed.</div>
+        </div>
+        <div class="product-visual pv-blue">
+          <div style="text-align:center">
+            <div style="font-size:40px;margin-bottom:8px">🔷</div>
+            <div style="font-size:12px;color:var(--accent)">Data Extraction Engine</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">40+ connectors · Sub-second sync</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-features">
+            <div class="product-feature">HANA live access & batch export</div>
+            <div class="product-feature">40+ pre-built platform connectors</div>
+            <div class="product-feature">Schema mapping & transformation</div>
+            <div class="product-feature">Scheduled & event-triggered sync</div>
+          </div>
+          <div class="product-price"><sup>$</sup>499</div>
+          <div class="product-price-sub">per month · up to 10 users</div>
+          <a href="#cta" class="btn-primary" style="width:100%;justify-content:center">Get Started →</a>
+        </div>
+      </div>
+      <div class="product-card reveal reveal-delay-1" style="border-color:rgba(124,92,191,0.3);box-shadow:0 0 40px rgba(124,92,191,0.1)">
+        <div class="product-header">
+          <div class="product-tag pt-ai">AI Powered</div>
+          <div class="product-name">Artilegenz AI Suite</div>
+          <div class="product-desc">The intelligent layer on top of Core — ML models, anomaly detection, natural language queries, and automated insight narratives for every executive.</div>
+        </div>
+        <div class="product-visual pv-purple">
+          <div style="text-align:center">
+            <div style="font-size:40px;margin-bottom:8px">🤖</div>
+            <div style="font-size:12px;color:#A47EFF">AI Intelligence Engine</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">ML models · NLQ · Forecasting</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-features">
+            <div class="product-feature">Everything in Core, plus:</div>
+            <div class="product-feature">ML anomaly detection & alerts</div>
+            <div class="product-feature">Natural language query (NLQ)</div>
+            <div class="product-feature">AI-written executive summaries</div>
+            <div class="product-feature">Predictive forecasting models</div>
+          </div>
+          <div class="product-price" style="color:#A47EFF"><sup>$</sup>1,299</div>
+          <div class="product-price-sub">per month · up to 25 users</div>
+          <a href="#cta" class="btn-primary" style="width:100%;justify-content:center;background:linear-gradient(135deg,var(--purple),#A47EFF)">Get Started →</a>
+        </div>
+      </div>
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-header">
+          <div class="product-tag pt-enterprise">Enterprise</div>
+          <div class="product-name">Artilegenz Enterprise</div>
+          <div class="product-desc">Unlimited scale for global organisations — multi-instance HANA support, advanced RBAC, custom integrations, dedicated SLAs, and white-glove onboarding.</div>
+        </div>
+        <div class="product-visual pv-gold">
+          <div style="text-align:center">
+            <div style="font-size:40px;margin-bottom:8px">🏢</div>
+            <div style="font-size:12px;color:var(--gold)">Enterprise Command</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:4px">Unlimited users · Custom SLA</div>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-features">
+            <div class="product-feature">Everything in AI Suite, plus:</div>
+            <div class="product-feature">Multi-HANA instance support</div>
+            <div class="product-feature">Advanced RBAC with SSO/SAML</div>
+            <div class="product-feature">Custom integration development</div>
+            <div class="product-feature">Dedicated CSM & 24/7 support</div>
+          </div>
+          <div class="product-price" style="color:var(--gold)">Custom</div>
+          <div class="product-price-sub">tailored to your organisation</div>
+          <a href="#cta" class="btn-primary" style="width:100%;justify-content:center;background:linear-gradient(135deg,#C47A0A,var(--gold))">Contact Sales →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- INDUSTRIES -->
+<section id="industries">
+  <div class="section-inner">
+    <div class="section-tag reveal">Industries</div>
+    <h2 class="section-title reveal">Purpose-built for<br>your sector</h2>
+    <p class="section-sub reveal">Artilegenz ships with industry-specific dashboards, pre-mapped SAP table configurations, and sector KPI libraries out of the box.</p>
+    <div class="industries-grid">
+      <div class="industry-card reveal"><span class="industry-emoji">🏭</span><div class="industry-name">Manufacturing</div><div class="industry-count">OEE · Production · Quality · MRP</div></div>
+      <div class="industry-card reveal reveal-delay-1"><span class="industry-emoji">🛒</span><div class="industry-name">Retail & CPG</div><div class="industry-count">POS · Category · Promo · Replen</div></div>
+      <div class="industry-card reveal reveal-delay-2"><span class="industry-emoji">🏦</span><div class="industry-name">Banking & Finance</div><div class="industry-count">Risk · Liquidity · Compliance · P&L</div></div>
+      <div class="industry-card reveal reveal-delay-3"><span class="industry-emoji">⚕️</span><div class="industry-name">Healthcare & Pharma</div><div class="industry-count">R&D Cost · Patient · Supply · Reg</div></div>
+      <div class="industry-card reveal"><span class="industry-emoji">⚡</span><div class="industry-name">Energy & Utilities</div><div class="industry-count">Asset · Grid · Outage · Cost/Unit</div></div>
+      <div class="industry-card reveal reveal-delay-1"><span class="industry-emoji">🚚</span><div class="industry-name">Logistics & 3PL</div><div class="industry-count">Fleet · Routes · SLA · Warehouse</div></div>
+      <div class="industry-card reveal reveal-delay-2"><span class="industry-emoji">🏗️</span><div class="industry-name">Construction & EPC</div><div class="industry-count">Project · Cost · Progress · Risk</div></div>
+      <div class="industry-card reveal reveal-delay-3"><span class="industry-emoji">💻</span><div class="industry-name">Technology & SaaS</div><div class="industry-count">ARR · Churn · CAC · Headcount</div></div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- INTEGRATIONS -->
+<section id="integrations">
+  <div class="section-inner">
+    <div class="integrations-split">
+      <div>
+        <div class="section-tag reveal">Integrations</div>
+        <h2 class="section-title reveal">Connect to every<br>platform you use</h2>
+        <p class="section-sub reveal">Pre-built, certified connectors to the world's leading BI, analytics, and cloud data platforms — maintained and updated by Artilegenz.</p>
+        <div class="integration-list" style="margin-top:32px">
+          <div class="integration-item reveal">
+            <div class="ii-icon">📊</div>
+            <div><div class="ii-title">Microsoft Power BI</div><div class="ii-desc">Certified DirectQuery & Import connectors with automatic schema mapping and incremental refresh.</div></div>
+          </div>
+          <div class="integration-item reveal">
+            <div class="ii-icon">📈</div>
+            <div><div class="ii-title">Tableau & Tableau Cloud</div><div class="ii-desc">Live connection with Hyper extract support. Publish HANA datasets as certified data sources.</div></div>
+          </div>
+          <div class="integration-item reveal">
+            <div class="ii-icon">❄️</div>
+            <div><div class="ii-title">Snowflake & Azure Synapse</div><div class="ii-desc">Zero-copy data sharing into cloud warehouses with full lineage tracking and governance.</div></div>
+          </div>
+          <div class="integration-item reveal">
+            <div class="ii-icon">☁️</div>
+            <div><div class="ii-title">SAP Analytics Cloud</div><div class="ii-desc">Native Artilegenz connector for SAC with live model support and story auto-generation.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="integrations-visual reveal">
+        <div class="integrations-center"><div class="int-center-label">Artilegenz.com</div><div class="int-center-sub">Universal Integration Hub</div></div>
+        <div class="integrations-grid-inner">
+          <div class="int-chip"><span class="int-logo">📊</span>Power BI</div>
+          <div class="int-chip"><span class="int-logo">📈</span>Tableau</div>
+          <div class="int-chip"><span class="int-logo">❄️</span>Snowflake</div>
+          <div class="int-chip"><span class="int-logo">☁️</span>SAC</div>
+          <div class="int-chip"><span class="int-logo">🔶</span>AWS S3</div>
+          <div class="int-chip"><span class="int-logo">🔷</span>Azure</div>
+          <div class="int-chip"><span class="int-logo">🟢</span>GCP BQ</div>
+          <div class="int-chip"><span class="int-logo">📗</span>Excel</div>
+          <div class="int-chip"><span class="int-logo">🔍</span>Qlik</div>
+          <div class="int-chip"><span class="int-logo">📉</span>Looker</div>
+          <div class="int-chip"><span class="int-logo">🗄️</span>Databricks</div>
+          <div class="int-chip"><span class="int-logo">🔗</span>API</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="section-tag reveal">Client Success</div>
+    <h2 class="section-title reveal">Trusted by leaders<br>who move fast</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"Artilegenz eliminated our end-of-month reporting crunch entirely. Our CFO now walks into board meetings with live P&L data on her tablet. It's transformed how we make decisions."</div>
+        <div class="tc-author">
+          <div class="tc-avatar av-blue">RK</div>
+          <div><div class="tc-name">Rajan Krishnamurthy</div><div class="tc-role">CIO · GlobalTech Industries</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"The role-based access feature is incredible. Our Regional VPs each see exactly their territory data, while I get the full consolidated view. No more data leakage concerns."</div>
+        <div class="tc-author">
+          <div class="tc-avatar av-gold">SM</div>
+          <div><div class="tc-name">Sarah Mitchell</div><div class="tc-role">CEO · Apex Consumer Group</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"We went from 3-day reporting cycles to live dashboards overnight. The AI anomaly detection caught a $2M inventory discrepancy before month-end close. ROI was immediate."</div>
+        <div class="tc-author">
+          <div class="tc-avatar av-green">DV</div>
+          <div><div class="tc-name">Dr. Dhruv Varma</div><div class="tc-role">CFO · Stellar Manufacturing</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="section-tag reveal" style="justify-content:center">Pricing</div>
+    <h2 class="section-title reveal" style="text-align:center">Transparent pricing.<br>No surprises.</h2>
+    <p class="section-sub reveal" style="text-align:center;margin:0 auto 0">Start free, scale as you grow. Every plan includes SAP HANA connectivity and our core export engine.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-price"><sup>$</sup>499</div>
+        <div class="pricing-price-sub">per month, billed annually</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pf-item"><span class="check">✓</span> 1 SAP HANA instance</div>
+          <div class="pf-item"><span class="check">✓</span> Up to 10 users</div>
+          <div class="pf-item"><span class="check">✓</span> 5 platform connectors</div>
+          <div class="pf-item"><span class="check">✓</span> Pre-built dashboards</div>
+          <div class="pf-item"><span class="check">✓</span> Role-based access control</div>
+          <div class="pf-item"><span class="cross" style="color:var(--text3)">✗</span> <span style="color:var(--text3)">AI/ML layer</span></div>
+          <div class="pf-item"><span class="cross" style="color:var(--text3)">✗</span> <span style="color:var(--text3)">Custom integrations</span></div>
+        </div>
+        <a href="#cta" class="btn-ghost" style="width:100%;justify-content:center">Start Free Trial</a>
+      </div>
+      <div class="pricing-card featured reveal reveal-delay-1">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-tier">Professional</div>
+        <div class="pricing-price"><sup>$</sup>1,299</div>
+        <div class="pricing-price-sub">per month, billed annually</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pf-item"><span class="check">✓</span> Up to 3 HANA instances</div>
+          <div class="pf-item"><span class="check">✓</span> Up to 25 users</div>
+          <div class="pf-item"><span class="check">✓</span> All 40+ connectors</div>
+          <div class="pf-item"><span class="check">✓</span> Full AI/ML intelligence layer</div>
+          <div class="pf-item"><span class="check">✓</span> Natural language queries</div>
+          <div class="pf-item"><span class="check">✓</span> Anomaly detection & alerts</div>
+          <div class="pf-item"><span class="check">✓</span> Priority support (8h SLA)</div>
+        </div>
+        <a href="#cta" class="btn-primary" style="width:100%;justify-content:center">Start Free Trial →</a>
+      </div>
+      <div class="pricing-card reveal reveal-delay-2">
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-price" style="font-size:32px;padding-top:6px">Custom</div>
+        <div class="pricing-price-sub">tailored to your organisation</div>
+        <div class="pricing-divider"></div>
+        <div class="pricing-features">
+          <div class="pf-item"><span class="check">✓</span> Unlimited HANA instances</div>
+          <div class="pf-item"><span class="check">✓</span> Unlimited users</div>
+          <div class="pf-item"><span class="check">✓</span> Custom integration builds</div>
+          <div class="pf-item"><span class="check">✓</span> Advanced SSO/SAML/SCIM</div>
+          <div class="pf-item"><span class="check">✓</span> Dedicated Success Manager</div>
+          <div class="pf-item"><span class="check">✓</span> 24/7 support (1h SLA)</div>
+          <div class="pf-item"><span class="check">✓</span> On-premise deployment option</div>
+        </div>
+        <a href="#cta" class="btn-ghost" style="width:100%;justify-content:center">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div id="cta" class="reveal">
+  <h2 class="cta-title">Ready to transform<br>how your leaders see data?</h2>
+  <p class="cta-sub">Join 500+ enterprises already making faster, smarter decisions with Artilegenz.com. Setup takes under 30 minutes.</p>
+  <div class="cta-actions">
+    <a href="#" class="btn-primary btn-large">Start Free 14-Day Trial →</a>
+    <a href="#" class="btn-ghost btn-large">Schedule a Live Demo</a>
+  </div>
+  <div class="cta-note">No credit card required · GDPR & SOC2 compliant · Cancel anytime</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="nav-logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:12px">
+          <div class="logo-icon">AG</div>
+          <div class="logo-text">Arti<span>legenz</span></div>
+        </div>
+        <div class="footer-brand-desc">The intelligent bridge between SAP HANA and every reporting platform your business depends on.</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Product</div>
+        <div class="footer-links">
+          <a href="#products">Artilegenz Core</a>
+          <a href="#products">AI Suite</a>
+          <a href="#products">Enterprise</a>
+          <a href="#integrations">Integrations</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Solutions</div>
+        <div class="footer-links">
+          <a href="#roles">For Executives</a>
+          <a href="#roles">For Finance</a>
+          <a href="#roles">For Sales</a>
+          <a href="#roles">For Operations</a>
+          <a href="#industries">By Industry</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-links">
+          <a href="#">About Us</a>
+          <a href="#">Careers</a>
+          <a href="#">Blog</a>
+          <a href="#">Press</a>
+          <a href="#">Partners</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-links">
+          <a href="#">Documentation</a>
+          <a href="#">API Reference</a>
+          <a href="#">Case Studies</a>
+          <a href="#">Community</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Artilegenz.com Ltd. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Security</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Role switching
+function switchRole(btn, role) {
+  document.querySelectorAll('.role-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.role-panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById('role-' + role);
+  if (panel) panel.classList.add('active');
+}
+
+// Step switching
+function setStep(el, idx) {
+  document.querySelectorAll('.step-item').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Mobile menu (simple toggle)
+function toggleMobileMenu() {
+  const links = document.querySelector('.nav-links');
+  const ctas = document.querySelector('.nav-ctas');
+  if (links.style.display === 'flex') {
+    links.style.display = ''; ctas.style.display = '';
+  } else {
+    links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:var(--ink2);padding:20px;gap:4px;border-bottom:1px solid var(--border);z-index:999';
+    ctas.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:auto;left:0;right:0;background:var(--ink2);padding:0 20px 20px;gap:8px;z-index:999;border-bottom:1px solid var(--border)';
+  }
+}
+
+// Animate numbers on scroll
+function animateValue(el, start, end, duration, suffix) {
+  let startTime = null;
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const val = Math.floor(progress * (end - start) + start);
+    el.textContent = val + suffix;
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+</script>
+</body>
+</html>
